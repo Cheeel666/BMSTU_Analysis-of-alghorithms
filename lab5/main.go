@@ -46,12 +46,11 @@ func (q *Queue) pop() *Person {
 }
 
 // var q *Queue
-
-func main() {
+func Сonveyor(n int) *Queue {
 	bread := make(chan *Person, 1)
 	s := make(chan *Person, 1)
 	t := make(chan *Person, 1)
-	n := 10
+
 	q := createQueue(n)
 	for i := 1; i <= n; i++ {
 		go produce(bread)
@@ -67,6 +66,11 @@ func main() {
 		el := <-t
 		q.push(el)
 	}
+	return q
+}
+func main() {
+	n := 30
+	q := Сonveyor(n)
 	for i := 1; i <= n; i++ {
 		el := q.pop()
 		fmt.Println("The", i, "person:")
